@@ -1,7 +1,7 @@
 syntax = "proto3";
 package helloworld;
 
-option go_package = "helloworldpb/";
+option go_package = "helloworldpb/";  //This would be the directory where the generated files will be placed
 
 message HelloWorldRequest{
     string request = 1;
