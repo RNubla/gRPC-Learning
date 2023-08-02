@@ -1,0 +1,27 @@
+syntax = "proto3";
+package youtube_dl;
+
+option go_package = "youtubeDL/";
+
+message GetVideoInfoRequest {
+    string videoURL = 1;
+}
+message GetVideoInfoResponse {
+    string id = 1;
+    string string = 2;
+    string thumbnail =3;
+    message RequestedFormats{
+        uint64 filesize = 1;
+        string format_id = 2;
+        string url = 3;
+        string ext = 4;
+        string video_ext = 5;
+        string audio_ext = 6;
+    }
+    repeated RequestedFormats requested_formats = 4;
+
+}
+
+service GetVideoInfoService{
+    rpc GetVideo(GetVideoInfoRequest) returns (GetVideoInfoResponse){}
+}
