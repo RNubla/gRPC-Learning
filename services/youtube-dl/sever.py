@@ -1,49 +1,28 @@
 from concurrent.futures import ThreadPoolExecutor
+import json
 import logging
 import grpc
 
 import yt_dlp
-from automapper import mapper
-from typing import List
-
 
 from youtube_dl_pb2 import GetVideoInfoResponse
+
 from youtube_dl_pb2_grpc import (
     GetVideoInfoServiceServicer,
     add_GetVideoInfoServiceServicer_to_server,
 )
 
-
-class RequestedFormatModel:
-    def __init__(
-        self,
-        filesize: int,
-        format_id: str,
-        url: str,
-        ext: str,
-        video_ext: str,
-        audio_ext: str,
-    ):
-        self.filesize = filesize
-        self.format_id = format_id
-        self.url = url
-        self.ext = ext
-        self.video_ext = video_ext
-        self.audio_ext = audio_ext
+import google.protobuf.json_format as json_format
 
 
-class GetVideoInfoResponseModel:
-    def __init__(
-        self,
-        id: str,
-        title: str,
-        thumbnail: str,
-        requested_formats: List[RequestedFormatModel],
-    ):
-        self.id = id
-        self.title = title
-        self.thumbnail = thumbnail
-        self.requested_formats = requested_formats
+# https://stackoverflow.com/questions/60345426/json-to-protobuf-in-python
+# its important to enable ignore_unkwon_fields because
+# 'data'  object contains more fields that what was specified from the message
+# having this set to true will allow to remove those unknown fields
+def toJson(data, type):
+    return json_format.Parse(
+        json.dumps(data, indent=None), type(), ignore_unknown_fields=True
+    )
 
 
 def get_video_info(videoURL: str):
@@ -54,26 +33,14 @@ def get_video_info(videoURL: str):
             info = ydl.extract_info(videoURL, download=False)
         except:
             logging.critical("error in extracting info")
-            # raise HTTPException(status_code=404)
-            # return HTTPException(status_code=404)
-    info = mapper.to(GetVideoInfoResponseModel).map(info)
-    info.requested_formats = mapper.to(RequestedFormatModel).map(info.requested_formats)
     return info
 
 
 class GetVideoInfoService(GetVideoInfoServiceServicer):
     def GetVideo(self, request, context):
         data = get_video_info(videoURL=request.videoURL)
-        print(data.requested_formats)
-        # logging.debug(data)
-        resp = GetVideoInfoResponse(
-            id=data.id,
-            title=data.title,
-            thumbnail=data.thumbnail,
-            requested_formats=data.requested_formats,
-        )
-        # resp = GetVideoInfoResponse()
-        # logging.debug(inspect.signature(GetVideoInfoResponse))
+        resp = toJson(data=data, type=GetVideoInfoResponse)
+        # print(resp)
         return resp
 
 

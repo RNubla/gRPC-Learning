@@ -6,28 +6,28 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
-
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n\x10youtube-dl.proto\x12\nyoutube_dl"\'\n\x13GetVideoInfoRequest\x12\x10\n\x08videoURL\x18\x01 \x01(\t"\x8b\x02\n\x14GetVideoInfoResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x11\n\tthumbnail\x18\x03 \x01(\t\x12L\n\x11requested_formats\x18\x04 \x03(\x0b\x32\x31.youtube_dl.GetVideoInfoResponse.RequestedFormats\x1aw\n\x10RequestedFormats\x12\x10\n\x08\x66ilesize\x18\x01 \x01(\x04\x12\x11\n\tformat_id\x18\x02 \x01(\t\x12\x0b\n\x03url\x18\x03 \x01(\t\x12\x0b\n\x03\x65xt\x18\x04 \x01(\t\x12\x11\n\tvideo_ext\x18\x05 \x01(\t\x12\x11\n\taudio_ext\x18\x06 \x01(\t2f\n\x13GetVideoInfoService\x12O\n\x08GetVideo\x12\x1f.youtube_dl.GetVideoInfoRequest\x1a .youtube_dl.GetVideoInfoResponse"\x00\x42\x0cZ\nyoutubeDL/b\x06proto3'
-)
+
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x10youtube-dl.proto\x12\nyoutube_dl\"\'\n\x13GetVideoInfoRequest\x12\x10\n\x08videoURL\x18\x01 \x01(\t\"w\n\x10RequestedFormats\x12\x10\n\x08\x66ilesize\x18\x01 \x01(\x04\x12\x11\n\tformat_id\x18\x02 \x01(\t\x12\x0b\n\x03url\x18\x03 \x01(\t\x12\x0b\n\x03\x65xt\x18\x04 \x01(\t\x12\x11\n\tvideo_ext\x18\x05 \x01(\t\x12\x11\n\taudio_ext\x18\x06 \x01(\t\"}\n\x14GetVideoInfoResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x11\n\tthumbnail\x18\x03 \x01(\t\x12\x37\n\x11requested_formats\x18\x04 \x03(\x0b\x32\x1c.youtube_dl.RequestedFormats2f\n\x13GetVideoInfoService\x12O\n\x08GetVideo\x12\x1f.youtube_dl.GetVideoInfoRequest\x1a .youtube_dl.GetVideoInfoResponse\"\x00\x42\x0cZ\nyoutubeDL/b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, "youtube_dl_pb2", _globals)
-if _descriptor._USE_C_DESCRIPTORS is False:
-    DESCRIPTOR._options = None
-    DESCRIPTOR._serialized_options = b"Z\nyoutubeDL/"
-    _globals["_GETVIDEOINFOREQUEST"]._serialized_start = 32
-    _globals["_GETVIDEOINFOREQUEST"]._serialized_end = 71
-    _globals["_GETVIDEOINFORESPONSE"]._serialized_start = 74
-    _globals["_GETVIDEOINFORESPONSE"]._serialized_end = 341
-    _globals["_GETVIDEOINFORESPONSE_REQUESTEDFORMATS"]._serialized_start = 222
-    _globals["_GETVIDEOINFORESPONSE_REQUESTEDFORMATS"]._serialized_end = 341
-    _globals["_GETVIDEOINFOSERVICE"]._serialized_start = 343
-    _globals["_GETVIDEOINFOSERVICE"]._serialized_end = 445
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'youtube_dl_pb2', _globals)
+if _descriptor._USE_C_DESCRIPTORS == False:
+
+  DESCRIPTOR._options = None
+  DESCRIPTOR._serialized_options = b'Z\nyoutubeDL/'
+  _globals['_GETVIDEOINFOREQUEST']._serialized_start=32
+  _globals['_GETVIDEOINFOREQUEST']._serialized_end=71
+  _globals['_REQUESTEDFORMATS']._serialized_start=73
+  _globals['_REQUESTEDFORMATS']._serialized_end=192
+  _globals['_GETVIDEOINFORESPONSE']._serialized_start=194
+  _globals['_GETVIDEOINFORESPONSE']._serialized_end=319
+  _globals['_GETVIDEOINFOSERVICE']._serialized_start=321
+  _globals['_GETVIDEOINFOSERVICE']._serialized_end=423
 # @@protoc_insertion_point(module_scope)

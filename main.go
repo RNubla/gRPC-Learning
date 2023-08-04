@@ -2,12 +2,25 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"github.com/RNubla/gRPC-Learning/gen/youtubeDL"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/protobuf/encoding/protojson"
+	"google.golang.org/protobuf/proto"
 )
+
+func toJSON(pb proto.Message) string {
+	out, err := protojson.Marshal(pb)
+
+	if err != nil {
+		log.Fatalln("Cant convert to JSON", err)
+	}
+
+	return string(out)
+}
 
 func main() {
 	addr := "localhost:9999"
@@ -30,8 +43,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Printf(resp.Id)
-	log.Printf(resp.Title)
-	log.Printf(resp.Thumbnail)
-	// log.Printf(resp.RequestedFormats.)
+
+	fmt.Println(toJSON(resp))
+
 }
