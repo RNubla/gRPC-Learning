@@ -19,7 +19,7 @@ import google.protobuf.json_format as json_format
 # its important to enable ignore_unkwon_fields because
 # 'data'  object contains more fields that what was specified from the message
 # having this set to true will allow to remove those unknown fields
-def toJson(data, type):
+def to_json(data, type):
     return json_format.Parse(
         json.dumps(data, indent=None), type(), ignore_unknown_fields=True
     )
@@ -39,7 +39,7 @@ def get_video_info(videoURL: str):
 class GetVideoInfoService(GetVideoInfoServiceServicer):
     def GetVideo(self, request, context):
         data = get_video_info(videoURL=request.videoURL)
-        resp = toJson(data=data, type=GetVideoInfoResponse)
+        resp = to_json(data=data, type=GetVideoInfoResponse)
         # print(resp)
         return resp
 
