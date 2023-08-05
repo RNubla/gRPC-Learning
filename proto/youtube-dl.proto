@@ -3,6 +3,8 @@ package youtube_dl;
 
 option go_package = "youtubeDL/";
 
+import "error.proto";
+
 message GetVideoInfoRequest {
     string videoURL = 1;
 }
@@ -22,7 +24,13 @@ message GetVideoInfoResponse {
     repeated RequestedFormats requested_formats = 4;
 
 }
+message Response{
+    oneof result{
+        GetVideoInfoResponse info_response = 1;
+        error.ErrorResponse error = 2;
+    }
+}
 
 service GetVideoInfoService{
-    rpc GetVideo(GetVideoInfoRequest) returns (GetVideoInfoResponse){}
+    rpc GetVideo(GetVideoInfoRequest) returns (Response){}
 }

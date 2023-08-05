@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GetVideoInfoServiceClient interface {
-	GetVideo(ctx context.Context, in *GetVideoInfoRequest, opts ...grpc.CallOption) (*GetVideoInfoResponse, error)
+	GetVideo(ctx context.Context, in *GetVideoInfoRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type getVideoInfoServiceClient struct {
@@ -33,8 +33,8 @@ func NewGetVideoInfoServiceClient(cc grpc.ClientConnInterface) GetVideoInfoServi
 	return &getVideoInfoServiceClient{cc}
 }
 
-func (c *getVideoInfoServiceClient) GetVideo(ctx context.Context, in *GetVideoInfoRequest, opts ...grpc.CallOption) (*GetVideoInfoResponse, error) {
-	out := new(GetVideoInfoResponse)
+func (c *getVideoInfoServiceClient) GetVideo(ctx context.Context, in *GetVideoInfoRequest, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
 	err := c.cc.Invoke(ctx, "/youtube_dl.GetVideoInfoService/GetVideo", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func (c *getVideoInfoServiceClient) GetVideo(ctx context.Context, in *GetVideoIn
 // All implementations must embed UnimplementedGetVideoInfoServiceServer
 // for forward compatibility
 type GetVideoInfoServiceServer interface {
-	GetVideo(context.Context, *GetVideoInfoRequest) (*GetVideoInfoResponse, error)
+	GetVideo(context.Context, *GetVideoInfoRequest) (*Response, error)
 	mustEmbedUnimplementedGetVideoInfoServiceServer()
 }
 
@@ -54,7 +54,7 @@ type GetVideoInfoServiceServer interface {
 type UnimplementedGetVideoInfoServiceServer struct {
 }
 
-func (UnimplementedGetVideoInfoServiceServer) GetVideo(context.Context, *GetVideoInfoRequest) (*GetVideoInfoResponse, error) {
+func (UnimplementedGetVideoInfoServiceServer) GetVideo(context.Context, *GetVideoInfoRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetVideo not implemented")
 }
 func (UnimplementedGetVideoInfoServiceServer) mustEmbedUnimplementedGetVideoInfoServiceServer() {}

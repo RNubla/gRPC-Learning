@@ -1,3 +1,4 @@
+import error_pb2 as _error_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
@@ -38,3 +39,11 @@ class GetVideoInfoResponse(_message.Message):
     thumbnail: str
     requested_formats: _containers.RepeatedCompositeFieldContainer[RequestedFormats]
     def __init__(self, id: _Optional[str] = ..., title: _Optional[str] = ..., thumbnail: _Optional[str] = ..., requested_formats: _Optional[_Iterable[_Union[RequestedFormats, _Mapping]]] = ...) -> None: ...
+
+class Response(_message.Message):
+    __slots__ = ["info_response", "error"]
+    INFO_RESPONSE_FIELD_NUMBER: _ClassVar[int]
+    ERROR_FIELD_NUMBER: _ClassVar[int]
+    info_response: GetVideoInfoResponse
+    error: _error_pb2.ErrorResponse
+    def __init__(self, info_response: _Optional[_Union[GetVideoInfoResponse, _Mapping]] = ..., error: _Optional[_Union[_error_pb2.ErrorResponse, _Mapping]] = ...) -> None: ...

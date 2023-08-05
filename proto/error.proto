@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package error;
+option go_package = "youtubeDL/";
+
+message ErrorResponse{
+    string error_message = 1;
+    uint32 status_code = 2;
+}

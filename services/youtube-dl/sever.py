@@ -1,28 +1,19 @@
 from concurrent.futures import ThreadPoolExecutor
 import json
 import logging
+from typing import TypeVar
 import grpc
 
 import yt_dlp
 
-from youtube_dl_pb2 import GetVideoInfoResponse
-
+from youtube_dl_pb2 import GetVideoInfoResponse, Response
+from error_pb2 import ErrorResponse
 from youtube_dl_pb2_grpc import (
     GetVideoInfoServiceServicer,
     add_GetVideoInfoServiceServicer_to_server,
 )
 
 import google.protobuf.json_format as json_format
-
-
-# https://stackoverflow.com/questions/60345426/json-to-protobuf-in-python
-# its important to enable ignore_unkwon_fields because
-# 'data'  object contains more fields that what was specified from the message
-# having this set to true will allow to remove those unknown fields
-def to_json(data, type):
-    return json_format.Parse(
-        json.dumps(data, indent=None), type(), ignore_unknown_fields=True
-    )
 
 
 def get_video_info(videoURL: str):
@@ -36,11 +27,42 @@ def get_video_info(videoURL: str):
     return info
 
 
+# https://stackoverflow.com/questions/60345426/json-to-protobuf-in-python
+# its important to enable ignore_unkwon_fields because
+# 'data'  object contains more fields that what was specified from the message
+# having this set to true will allow to remove those unknown fields
+T = TypeVar("T")
+
+
+def to_json(data, type):
+    data_type = type
+    json_format.Parse(
+        json.dumps(data, indent=None), data_type, ignore_unknown_fields=True
+    )
+    return data_type
+
+
+def from_json(data):
+    return json_format.MessageToJson(data)
+
+
 class GetVideoInfoService(GetVideoInfoServiceServicer):
     def GetVideo(self, request, context):
         data = get_video_info(videoURL=request.videoURL)
-        resp = to_json(data=data, type=GetVideoInfoResponse)
-        # print(resp)
+        resp = Response()
+        if data is not None:
+            result = to_json(data=data, type=GetVideoInfoResponse())
+            # When an error message shows up with the follow:
+            # Assignment not allowed to message, map, or repeated field "field_name" in protocol message object
+            # use CopyFrom
+            # https://stackoverflow.com/questions/18376190/attributeerror-assignment-not-allowed-to-composite-field-task-in-protocol-mes
+            resp.info_response.CopyFrom(result)
+        else:
+            errObj = {"error_message": "video not found", "status_code": 404}
+            errorMsg = to_json(data=errObj, type=ErrorResponse())
+            resp.error.CopyFrom(errorMsg)
+            # context.set_code(grpc.StatusCode.NOT_FOUND)
+
         return resp
 
 
