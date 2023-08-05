@@ -27,13 +27,13 @@ def get_video_info(videoURL: str):
     return info
 
 
+T = TypeVar("T")
+
+
 # https://stackoverflow.com/questions/60345426/json-to-protobuf-in-python
 # its important to enable ignore_unkwon_fields because
 # 'data'  object contains more fields that what was specified from the message
 # having this set to true will allow to remove those unknown fields
-T = TypeVar("T")
-
-
 def to_json(data, type):
     data_type = type
     json_format.Parse(
