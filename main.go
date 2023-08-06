@@ -3,7 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com/RNubla/gRPC-Learning/router"
+	"gRPC-Learning/router"
+
 	"github.com/gofiber/fiber/v2"
 )
 

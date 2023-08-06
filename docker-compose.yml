@@ -1,5 +1,16 @@
+version: 'alpine'
 services:
+  api:
+    build: .
   service-youtube-dl:
     build: ./services/youtube-dl
     ports:
       - "9999:9999"
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api
+    ports:
+      - 3000:3000

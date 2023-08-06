@@ -4,7 +4,8 @@ import (
 	"context"
 	"log"
 
-	"github.com/RNubla/gRPC-Learning/gen/youtubeDL"
+	"gRPC-Learning/gen/youtubeDL"
+
 	"github.com/gofiber/fiber/v2"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"

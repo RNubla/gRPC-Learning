@@ -1,7 +1,8 @@
 package router
 
 import (
-	"github.com/RNubla/gRPC-Learning/handler"
+	"gRPC-Learning/handler"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
