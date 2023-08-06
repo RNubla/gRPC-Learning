@@ -1,0 +1,5 @@
+services:
+  service-youtube-dl:
+    build: ./services/youtube-dl
+    ports:
+      - "9999:9999"
