@@ -2,6 +2,8 @@ version: 'alpine'
 services:
   api:
     build: .
+    ports: 
+      - "6000"
   service-youtube-dl:
     build: ./services/youtube-dl
     ports:
@@ -13,4 +15,4 @@ services:
     depends_on:
       - api
     ports:
-      - 3000:3000
+      - "4000:4000"
