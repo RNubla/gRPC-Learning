@@ -31,6 +31,12 @@ Thanks to Miki Tebeka for writing this [article](https://www.ardanlabs.com/blog/
 4. We also need to override the service `Print` so that we can manipulate the data that was sent from the client/go.
 5. `add_HelloWorldServicer_to_server(HelloWorldServer(), server)` This code will add the service to the server
 
+# Load Balancer References
+
+https://www.useanvil.com/blog/engineering/grpc-load-balancing/
+https://medium.com/bitaksi-tech/round-robin-load-balancing-with-nginx-via-docker-eng-b183a11bcc8b
+https://linuxhint.com/scale-docker-containers-using-nginx-reverse-proxy-and-load-balancer/
+
 ### Reference
 
 https://www.ardanlabs.com/blog/2020/06/python-go-grpc.html
