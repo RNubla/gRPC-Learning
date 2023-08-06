@@ -48,9 +48,9 @@ func GetVideoInfo(c *fiber.Ctx) error {
 		log.Fatal(err)
 	}
 
-	if resp.GetError().StatusCode == 404 {
-		return fiber.NewError(fiber.StatusNotFound, string("video not found"))
-	}
+	// if &resp.GetError().StatusCode == 404 {
+	// 	return fiber.NewError(fiber.StatusNotFound, string("video not found"))
+	// }
 
 	return c.JSON(resp)
 
