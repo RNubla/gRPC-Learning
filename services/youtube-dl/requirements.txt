@@ -1,3 +1,4 @@
+# use pipreqs to export packages
 grpcio==1.56.2
 protobuf==4.23.4
 yt_dlp==2023.7.6
