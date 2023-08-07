@@ -1,4 +1,6 @@
-# Learnning to use load balancer using nginx
+# Learning to use load balancer using nginx
+
+``docker-compose up --scale fast-api=2 --build -d`
 
 # Load Balancer References
 
