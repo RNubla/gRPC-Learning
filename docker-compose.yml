@@ -13,8 +13,8 @@ services:
     build:
       context: goapp
       target: builder
-    # ports:
-    #   - "70"
+    ports:
+      - "70"
   proxy:
     image: nginx
     restart: always
