@@ -8,10 +8,10 @@ import (
 )
 
 func SetupRoutes(app *fiber.App) {
-	api := app.Group("/api", logger.New())
+	api := app.Group("/api/", logger.New())
 	api.Get("/", handler.Hello)
 
 	// YTDL GetInfo
-	ytdl := api.Group("/ytdl")
+	ytdl := api.Group("/ytdl/", logger.New())
 	ytdl.Post("/", handler.GetVideoInfo)
 }
