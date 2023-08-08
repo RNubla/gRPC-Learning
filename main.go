@@ -8,7 +8,6 @@ import (
 	"gRPC-Learning/router"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
 )
 
@@ -80,17 +79,18 @@ func goDotEnvVariable(key string) string {
 func main() {
 
 	app := fiber.New()
-	app.Use(cors.New(cors.Config{
-		AllowHeaders:     "Origin,Content-Type,Accept,Content-Length,Accept-Language,Accept-Encoding,Connection,Access-Control-Allow-Origin",
-		AllowOrigins:     "*",
-		AllowCredentials: true,
-		AllowMethods:     "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS",
-	}))
+	// app.Use(cors.New(cors.Config{
+	// 	AllowHeaders:     "Origin,Content-Type,Accept,Content-Length,Accept-Language,Accept-Encoding,Connection,Access-Control-Allow-Origin",
+	// 	AllowOrigins:     "*",
+	// 	AllowCredentials: true,
+	// 	AllowMethods:     "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS",
+	// }))
 	router.SetupRoutes(app)
 
-	serverHost := goDotEnvVariable("SERVER_HOST")
+	// serverHost := goDotEnvVariable("SERVER_HOST")
 	port := goDotEnvVariable("SERVER_PORT")
-	url := fmt.Sprint(serverHost, ":", port)
+	// url := fmt.Sprint(serverHost, ":", port)
+	url := fmt.Sprint(":", port)
 
 	log.Fatal(app.Listen(url))
 	// log.Fatal(app.Listen("localhost:5000"))

@@ -33,6 +33,12 @@ Thanks to Miki Tebeka for writing this [article](https://www.ardanlabs.com/blog/
 
 # Load Balancer References
 
+In order for our go app to use the proxy as a load balancer, we only need to set the port number. We dont need to set the hostname.
+
+```
+app.Listen(":70")
+```
+
 https://www.useanvil.com/blog/engineering/grpc-load-balancing/
 https://medium.com/bitaksi-tech/round-robin-load-balancing-with-nginx-via-docker-eng-b183a11bcc8b
 https://linuxhint.com/scale-docker-containers-using-nginx-reverse-proxy-and-load-balancer/

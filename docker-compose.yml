@@ -1,18 +1,23 @@
 version: 'alpine'
 services:
-  go-api:
+  goapi:
     build: .
     ports:
-      - "6000"
-  service-youtube-dl:
-    build: ./services/youtube-dl
-    ports:
-      - "9999:9999"
+      - "70"
+    # service-youtube-dl:
+    #   build: ./services/youtube-dl
+    #   ports:
+    #     - "9999:9999"
   nginx:
     image: nginx:latest
+    restart: always
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/nginx/nginx.conf
+        read_only: true
+      # - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      - go-api
+      - goapi
     ports:
-      - "4000:4000"
+      - "8080:8080"
